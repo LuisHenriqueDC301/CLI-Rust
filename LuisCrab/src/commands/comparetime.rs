@@ -1,17 +1,28 @@
-use std::process::Command;
-use std::path::PathBuf;
 use std::env;
+use std::path::PathBuf;
+use std::process::Command;
 
-pub fn run(){
-    run_cpp("Par.cpp");   
+pub fn run(lang: &String, file: &String) {
+    if lang == "py" {
+        run_python(file);
+    } else {
+        if lang == "cpp" {
+            run_cpp(file);
+        } else {
+            if lang == "c" {
+                run_c(file);
+            } else {
+                println!("Erro, linguagem invalida");
+            }
+        }
+    }
 }
 
-
 fn path(file: &str) -> PathBuf {
-    env::current_dir()          // Obtém o diretório atual
+    env::current_dir() // Obtém o diretório atual
         .expect("Falha ao obter o diretório")
-        .join("src/scripts")    // Adiciona a pasta `src/scripts` ao caminho
-        .join(file)             // Adiciona o nome do arquivo
+        .join("src/scripts") // Adiciona a pasta `src/scripts` ao caminho
+        .join(file) // Adiciona o nome do arquivo
 }
 
 pub fn run_cpp(file: &str) {
@@ -22,7 +33,8 @@ pub fn run_cpp(file: &str) {
         return;
     }
 
-    let bin_name = cpp_file.file_stem()
+    let bin_name = cpp_file
+        .file_stem()
         .expect("Nome de arquivo inválido")
         .to_str()
         .expect("Falha na conversão do nome");
@@ -56,7 +68,6 @@ pub fn run_cpp(file: &str) {
     }
 }
 
-
 fn run_c(file: &str) {
     let c_file = path(file);
 
@@ -65,7 +76,8 @@ fn run_c(file: &str) {
         return;
     }
 
-    let bin_name = c_file.file_stem()
+    let bin_name = c_file
+        .file_stem()
         .expect("Nome de arquivo inválido")
         .to_str()
         .expect("Falha na conversão do nome");
@@ -99,14 +111,13 @@ fn run_c(file: &str) {
     }
 }
 
-fn run_python(file :&str){
-
+fn run_python(file: &str) {
     let _output = Command::new("python3")
-    .arg(path(file))
-    .output()
-    .expect("Erro Caminho Arquivo");
+        .arg(path(file))
+        .output()
+        .expect("Erro Caminho Arquivo");
 
-    if _output.status.success(){
+    if _output.status.success() {
         println!("Saída: {}", String::from_utf8_lossy(&_output.stdout));
     } else {
         eprintln!("Erro: {}", String::from_utf8_lossy(&_output.stderr));
