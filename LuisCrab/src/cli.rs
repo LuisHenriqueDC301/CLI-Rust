@@ -35,8 +35,8 @@ pub enum Commands {
     //Mostra o Crab,
     Mascote,
 
-    //Compara o tempo de execucao entre rust e outro script(py, c, cpp)
-    CompareTime{
+    //Executa um script em outra linguagem
+    ExecuteScript{
         #[arg(short, long)]
         lang: String,
         #[arg(short, long)]

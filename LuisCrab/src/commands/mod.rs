@@ -5,4 +5,4 @@ pub mod exemplo;
 pub mod tutorial;
 pub mod sobre;
 pub mod mascote;
-pub mod comparetime;
+pub mod execute_script;

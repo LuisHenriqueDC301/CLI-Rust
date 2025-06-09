@@ -16,6 +16,6 @@ fn main() {
         Commands::Tutorial => tutorial::run(),
         Commands::Sobre => sobre::run(),
         Commands::Mascote => mascote::run(),
-        Commands::CompareTime {lang, file} => comparetime::run(lang, file),
+        Commands::ExecuteScript {lang, file} => execute_script::run(lang, file),
     }
 }
