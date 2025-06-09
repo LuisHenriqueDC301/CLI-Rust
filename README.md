@@ -28,6 +28,5 @@ Este CLI permite:
 ### ▶️ Executar o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/LuisCrab.git
 cd LuisCrab
 cargo run -- <comando>
